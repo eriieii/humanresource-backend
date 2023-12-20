@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TeamController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -44,6 +45,14 @@ Route::prefix('teams')->middleware('auth:sanctum')->name('teams.')->group(functi
     Route::post('/create', [TeamController::class, 'create'])->name('create');
     Route::post('/update/{id}', [TeamController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [TeamController::class, 'destroy'])->name('destroy');
+});
+
+//Role
+Route::prefix('role')->middleware('auth:sanctum')->name('role.')->group(function () {
+    Route::get('', [RoleController::class, 'fetch'])->name('fetch');
+    Route::post('/create', [RoleController::class, 'create'])->name('create');
+    Route::post('/update/{id}', [RoleController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [RoleController::class, 'destroy'])->name('destroy');
 });
 
 
