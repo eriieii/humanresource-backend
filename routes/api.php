@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\TeamController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,13 +31,19 @@ Route::name('auth.')->group(function () {
         Route::get('user', [UserController::class, 'fetch'])->name('fetch');
     });
 });
-
-
 //Company
 Route::prefix('company')->middleware('auth:sanctum')->name('company.')->group(function () {
     Route::get('', [CompanyController::class, 'fetch'])->name('fetch');
     Route::post('/create', [CompanyController::class, 'create'])->name('create');
     Route::post('/update/{id}', [CompanyController::class, 'update'])->name('update');
+});
+
+//Team
+Route::prefix('teams')->middleware('auth:sanctum')->name('teams.')->group(function () {
+    Route::get('', [TeamController::class, 'fetch'])->name('fetch');
+    Route::post('/create', [TeamController::class, 'create'])->name('create');
+    Route::post('/update/{id}', [TeamController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [TeamController::class, 'destroy'])->name('destroy');
 });
 
 
