@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\ResponsibilityController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TeamController;
 use App\Http\Controllers\API\UserController;
@@ -53,6 +54,13 @@ Route::prefix('role')->middleware('auth:sanctum')->name('role.')->group(function
     Route::post('/create', [RoleController::class, 'create'])->name('create');
     Route::post('/update/{id}', [RoleController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [RoleController::class, 'destroy'])->name('destroy');
+});
+
+//Responsibility
+Route::prefix('responsibility')->middleware('auth:sanctum')->name('responsibility.')->group(function () {
+    Route::get('', [ResponsibilityController::class, 'fetch'])->name('fetch');
+    Route::post('/create', [ResponsibilityController::class, 'create'])->name('create');   
+    Route::delete('/delete/{id}', [ResponsibilityController::class, 'destroy'])->name('destroy');
 });
 
 
