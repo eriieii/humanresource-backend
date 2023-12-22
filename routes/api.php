@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\API\CompanyController;
-use App\Http\Controllers\API\ResponsibilityController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TeamController;
 use App\Http\Controllers\API\UserController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\EmployeeController;
+use App\Http\Controllers\API\ResponsibilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,11 @@ Route::prefix('responsibility')->middleware('auth:sanctum')->name('responsibilit
     Route::delete('/delete/{id}', [ResponsibilityController::class, 'destroy'])->name('destroy');
 });
 
+// Employee API
+Route::prefix('employee')->middleware('auth:sanctum')->name('employee.')->group(function () {
+    Route::get('', [EmployeeController::class, 'fetch'])->name('fetch');
+    Route::post('', [EmployeeController::class, 'create'])->name('create');
+    Route::post('update/{id}', [EmployeeController::class, 'update'])->name('update');
+    Route::delete('{id}', [EmployeeController::class, 'destroy'])->name('delete');
+});
 
